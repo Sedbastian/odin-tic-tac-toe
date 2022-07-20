@@ -8,25 +8,32 @@ const Jugador = function (nombre, marcas) {
 const jugador1 = Jugador("Sebi", "o");
 const jugador2 = Jugador("Grili", "x");
 
-const tablero = (function () {
-    let arregloTablero = ["o", "x", "o", "x", "o", "x", "o", "x", "o"];
+const juego = (function () {
+    let arregloTablero = [".", ".", ".", ".", ".", ".", ".", ".", "."];
+
+    function jugada (event) {
+        console.log(event);
+        console.log(event.target.dataset.casillero);
+    };
 
     return {
         arregloTablero,
+        jugada,
     }
 })();
 
-const controladorDisplay = (function () {
-    console.log(tablero);
-    console.log(tablero.arregloTablero.length);
-    console.log(`Jugador 1: ${jugador1.nombre}, marcas: ${jugador1.marcas}.`);
-    console.log(`Jugador 2: ${jugador2.nombre}, marcas: ${jugador2.marcas}.`);
-    return tablero.arregloTablero;
-})();
-
 const divTablero = document.querySelector(".tablero");
-tablero.arregloTablero.forEach(casillero => {
+
+for (let casillero = 0; casillero < juego.arregloTablero.length; casillero++) {
     const divCasillero = document.createElement("div");
-    divCasillero.textContent = casillero;
+    divCasillero.textContent = ".";
+    divCasillero.setAttribute("data-casillero", `${casillero}`);
+    divCasillero.addEventListener("click", event => {
+        juego.jugada (event);
+    });
     divTablero.appendChild(divCasillero);
-});
+}
+
+    
+
+
