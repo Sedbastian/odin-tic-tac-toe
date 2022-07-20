@@ -30,14 +30,31 @@ const juego = (function () {
         };
     };
     
+    function ganador () {
+        console.log(`Ganador ${jugadorEnTurno.nombre}`);
+    };
+
     function jugada (event) {
         arregloTablero[event.target.dataset.casillero] = jugadorEnTurno.marca;
+        dibujarTablero();
+        
+        if ((juego.arregloTablero[0] === jugadorEnTurno.marca && juego.arregloTablero[1] === jugadorEnTurno.marca && juego.arregloTablero[2] === jugadorEnTurno.marca)
+         || (juego.arregloTablero[3] === jugadorEnTurno.marca && juego.arregloTablero[4] === jugadorEnTurno.marca && juego.arregloTablero[5] === jugadorEnTurno.marca)
+         || (juego.arregloTablero[6] === jugadorEnTurno.marca && juego.arregloTablero[7] === jugadorEnTurno.marca && juego.arregloTablero[8] === jugadorEnTurno.marca)
+         || (juego.arregloTablero[0] === jugadorEnTurno.marca && juego.arregloTablero[3] === jugadorEnTurno.marca && juego.arregloTablero[6] === jugadorEnTurno.marca)
+         || (juego.arregloTablero[1] === jugadorEnTurno.marca && juego.arregloTablero[4] === jugadorEnTurno.marca && juego.arregloTablero[7] === jugadorEnTurno.marca)
+         || (juego.arregloTablero[2] === jugadorEnTurno.marca && juego.arregloTablero[5] === jugadorEnTurno.marca && juego.arregloTablero[8] === jugadorEnTurno.marca)
+         || (juego.arregloTablero[0] === jugadorEnTurno.marca && juego.arregloTablero[4] === jugadorEnTurno.marca && juego.arregloTablero[8] === jugadorEnTurno.marca)
+         || (juego.arregloTablero[2] === jugadorEnTurno.marca && juego.arregloTablero[4] === jugadorEnTurno.marca && juego.arregloTablero[6] === jugadorEnTurno.marca)
+         ) {
+            ganador();
+        };
+
         if (jugadorEnTurno === jugador1) {
             jugadorEnTurno = jugador2;
         } else if (jugadorEnTurno === jugador2) {
             jugadorEnTurno = jugador1;
         };
-        dibujarTablero();
     };
 
     return {
