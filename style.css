@@ -1,0 +1,13 @@
+.tablero {
+    display: grid;
+    grid-template-columns: 4rem 4rem 4rem;
+    grid-auto-rows: 4rem; 
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.tablero > div {
+    /* align-self: center; */
+    font-size: 4rem;
+}   
