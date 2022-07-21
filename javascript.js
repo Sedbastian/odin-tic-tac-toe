@@ -1,35 +1,18 @@
-function FabricaJugador (nombre, marca) {
-    return {
-        nombre,
-        marca,
-    }
-};
-
-const jugador1 = FabricaJugador ("Sebi", "x");
-const jugador2 = FabricaJugador ("Grili", "o");
-
 const juego = (function () {
-    let jugadorEnTurno = jugador1;
-
-    let arregloTablero = [".", ".", ".", ".", ".", ".", ".", ".", "."];
-
-    function dibujarTablero () {
-        let divsAremover = document.querySelectorAll(".casillero");
-        divsAremover.forEach (div => {
-            div.remove();
-        });
-        for (let casillero = 0; casillero < juego.arregloTablero.length; casillero++) {
-            const divCasillero = document.createElement("div");
-            divCasillero.setAttribute("data-casillero", `${casillero}`);
-            divCasillero.setAttribute("class", "casillero");
-            divCasillero.addEventListener("click", event => {
-                juego.jugada (event);
-            });
-            divCasillero.textContent = arregloTablero[casillero];
-            divTablero.appendChild(divCasillero);
-        };
+    function FabricaJugador (nombre, marca) {
+        return {
+            nombre,
+            marca,
+        }
     };
     
+    const jugador1 = FabricaJugador ("Sebi", "x");
+    const jugador2 = FabricaJugador ("Grili", "o");
+    let jugadorEnTurno = jugador1;
+
+    
+    let arregloTablero = ["", "", "", "", "", "", "", "", ""];
+
     function ganador () {
         console.log(`Ganador ${jugadorEnTurno.nombre}`);
     };
@@ -41,14 +24,14 @@ const juego = (function () {
         arregloTablero[event.target.dataset.casillero] = jugadorEnTurno.marca;
         dibujarTablero();
         
-        if ((juego.arregloTablero[0] === jugadorEnTurno.marca && juego.arregloTablero[1] === jugadorEnTurno.marca && juego.arregloTablero[2] === jugadorEnTurno.marca)
-         || (juego.arregloTablero[3] === jugadorEnTurno.marca && juego.arregloTablero[4] === jugadorEnTurno.marca && juego.arregloTablero[5] === jugadorEnTurno.marca)
-         || (juego.arregloTablero[6] === jugadorEnTurno.marca && juego.arregloTablero[7] === jugadorEnTurno.marca && juego.arregloTablero[8] === jugadorEnTurno.marca)
-         || (juego.arregloTablero[0] === jugadorEnTurno.marca && juego.arregloTablero[3] === jugadorEnTurno.marca && juego.arregloTablero[6] === jugadorEnTurno.marca)
-         || (juego.arregloTablero[1] === jugadorEnTurno.marca && juego.arregloTablero[4] === jugadorEnTurno.marca && juego.arregloTablero[7] === jugadorEnTurno.marca)
-         || (juego.arregloTablero[2] === jugadorEnTurno.marca && juego.arregloTablero[5] === jugadorEnTurno.marca && juego.arregloTablero[8] === jugadorEnTurno.marca)
-         || (juego.arregloTablero[0] === jugadorEnTurno.marca && juego.arregloTablero[4] === jugadorEnTurno.marca && juego.arregloTablero[8] === jugadorEnTurno.marca)
-         || (juego.arregloTablero[2] === jugadorEnTurno.marca && juego.arregloTablero[4] === jugadorEnTurno.marca && juego.arregloTablero[6] === jugadorEnTurno.marca)
+        if ((arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[1] === jugadorEnTurno.marca && arregloTablero[2] === jugadorEnTurno.marca)
+         || (arregloTablero[3] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[5] === jugadorEnTurno.marca)
+         || (arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[7] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca)
+         || (arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[3] === jugadorEnTurno.marca && arregloTablero[6] === jugadorEnTurno.marca)
+         || (arregloTablero[1] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[7] === jugadorEnTurno.marca)
+         || (arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[5] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca)
+         || (arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca)
+         || (arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[6] === jugadorEnTurno.marca)
          ) {
             ganador();
         };
@@ -59,14 +42,33 @@ const juego = (function () {
             jugadorEnTurno = jugador1;
         };
     };
-
+    
+    const divTablero = document.querySelector(".tablero");
+    
+    function dibujarTablero () {
+        let divsAremover = document.querySelectorAll(".casillero");
+        divsAremover.forEach (div => {
+            div.remove();
+        });
+        for (let casillero = 0; casillero < arregloTablero.length; casillero++) {
+            const divCasillero = document.createElement("div");
+            divCasillero.setAttribute("data-casillero", `${casillero}`);
+            divCasillero.setAttribute("class", "casillero");
+            divCasillero.addEventListener("click", event => {
+                jugada(event);
+            });
+            divCasillero.textContent = arregloTablero[casillero];
+            divTablero.appendChild(divCasillero);
+        };
+    };
+    
+    function arrancar () {
+        dibujarTablero();
+    }
+    
     return {
-        arregloTablero,
-        dibujarTablero,
-        jugada,
+        arrancar,
     }
 })();
 
-const divTablero = document.querySelector(".tablero");
-
-juego.dibujarTablero();
+juego.arrancar();
