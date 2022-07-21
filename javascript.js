@@ -12,15 +12,21 @@ const juego = (function () {
 
     
     let arregloTablero = ["", "", "", "", "", "", "", "", ""];
+    let numeroTotalJugadas = 9;
 
     function ganador () {
         console.log(`Ganador ${jugadorEnTurno.nombre}`);
+    };
+
+    function empate () {
+        console.log("Empate");
     };
 
     function jugada (event) {
         if (arregloTablero[event.target.dataset.casillero] === jugador1.marca || arregloTablero[event.target.dataset.casillero] === jugador1.marca) {
             return;
         };
+
         arregloTablero[event.target.dataset.casillero] = jugadorEnTurno.marca;
         dibujarTablero();
         
@@ -34,8 +40,16 @@ const juego = (function () {
          || (arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[6] === jugadorEnTurno.marca)
          ) {
             ganador();
+            return;
         };
 
+        numeroTotalJugadas--;
+        console.log(numeroTotalJugadas);
+
+        if (numeroTotalJugadas === 0) {
+            empate();
+        };
+            
         if (jugadorEnTurno === jugador1) {
             jugadorEnTurno = jugador2;
         } else if (jugadorEnTurno === jugador2) {
