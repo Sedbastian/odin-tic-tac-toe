@@ -1,27 +1,37 @@
 const juego = (function () {
+    let jugador1;
+    let jugador2;
+    let jugadorEnTurno;
+    let arregloTablero;
+    let numeroTotalJugadas;
+
+    const divTablero = document.querySelector(".tablero");
+
     function FabricaJugador (nombre, marca) {
         return {
             nombre,
             marca,
         }
     };
-    
-    let jugador1;
-    let jugador2;
-    let jugadorEnTurno;
-    let arregloTablero;
-    let numeroTotalJugadas = 9;
 
     function ganador () {
-        console.log(`Ganador ${jugadorEnTurno.nombre}`);
         const divCasilleroAremoverListener = document.querySelectorAll(".casillero");
         for (let casillero = 0; casillero < arregloTablero.length; casillero++) {
             divCasilleroAremoverListener[casillero].removeEventListener("click", jugada);
         };
+        const cuerpi = document.querySelector("body");
+        const divGanador = document.createElement("div");
+        divGanador.setAttribute("class", "divResultado");
+        divGanador.textContent = `¡Gana ${jugadorEnTurno.nombre}, con las "${jugadorEnTurno.marca}"!`;
+        cuerpi.appendChild(divGanador);
     };
 
     function empate () {
-        console.log("Empate");
+        const cuerpi = document.querySelector("body");
+        const divEmpate = document.createElement("div");
+        divEmpate.setAttribute("class", "divResultado");
+        divEmpate.textContent = "¡Empate!";
+        cuerpi.appendChild(divEmpate);
     };
 
     function jugada (event) {
@@ -60,8 +70,6 @@ const juego = (function () {
         };
     };
     
-    const divTablero = document.querySelector(".tablero");
-    
     function dibujarTablero () {
         let divsAremover = document.querySelectorAll(".casillero");
         divsAremover.forEach (div => {
@@ -85,6 +93,7 @@ const juego = (function () {
         jugador2 = FabricaJugador ((prompt("Nombre del jugador con marcas O?", "Jugador2")), "o");
         jugadorEnTurno = jugador1;
         arregloTablero = ["", "", "", "", "", "", "", "", ""];
+        numeroTotalJugadas = 9;
 
         dibujarTablero();
     }
