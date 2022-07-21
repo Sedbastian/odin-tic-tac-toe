@@ -1,13 +1,26 @@
+body {
+    background-color: black;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+}
+
 .tablero {
     display: grid;
     grid-template-columns: 4rem 4rem 4rem;
-    grid-auto-rows: 4rem; 
+    grid-auto-rows: 4rem;
+    gap: .5rem;
     justify-content: center;
-    justify-items: center;
-    align-items: center;
+    justify-items: stretch;
+    align-items: stretch;
+    background-color: olivedrab;
+    width: min-content;
 }
 
 .tablero > div {
-    /* align-self: center; */
-    font-size: 4rem;
-}   
+    background-color: darkslateblue;
+    font-size: 3rem;
+    text-align: center;
+}

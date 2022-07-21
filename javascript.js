@@ -35,6 +35,9 @@ const juego = (function () {
     };
 
     function jugada (event) {
+        if (arregloTablero[event.target.dataset.casillero] === jugador1.marca || arregloTablero[event.target.dataset.casillero] === jugador1.marca) {
+            return;
+        };
         arregloTablero[event.target.dataset.casillero] = jugadorEnTurno.marca;
         dibujarTablero();
         
@@ -58,7 +61,6 @@ const juego = (function () {
     };
 
     return {
-        FabricaJugador,
         arregloTablero,
         dibujarTablero,
         jugada,
