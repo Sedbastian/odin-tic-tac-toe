@@ -6,16 +6,18 @@ const juego = (function () {
         }
     };
     
-    const jugador1 = FabricaJugador ("Sebi", "x");
-    const jugador2 = FabricaJugador ("Grili", "o");
-    let jugadorEnTurno = jugador1;
-
-    
-    let arregloTablero = ["", "", "", "", "", "", "", "", ""];
+    let jugador1;
+    let jugador2;
+    let jugadorEnTurno;
+    let arregloTablero;
     let numeroTotalJugadas = 9;
 
     function ganador () {
         console.log(`Ganador ${jugadorEnTurno.nombre}`);
+        const divCasilleroAremoverListener = document.querySelectorAll(".casillero");
+        for (let casillero = 0; casillero < arregloTablero.length; casillero++) {
+            divCasilleroAremoverListener[casillero].removeEventListener("click", jugada);
+        };
     };
 
     function empate () {
@@ -23,11 +25,12 @@ const juego = (function () {
     };
 
     function jugada (event) {
-        if (arregloTablero[event.target.dataset.casillero] === jugador1.marca || arregloTablero[event.target.dataset.casillero] === jugador1.marca) {
+        if (arregloTablero[event.target.dataset.casillero] === jugador1.marca || arregloTablero[event.target.dataset.casillero] === jugador2.marca) {
             return;
+        } else {
+            arregloTablero[event.target.dataset.casillero] = jugadorEnTurno.marca;
         };
 
-        arregloTablero[event.target.dataset.casillero] = jugadorEnTurno.marca;
         dibujarTablero();
         
         if ((arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[1] === jugadorEnTurno.marca && arregloTablero[2] === jugadorEnTurno.marca)
@@ -68,15 +71,21 @@ const juego = (function () {
             const divCasillero = document.createElement("div");
             divCasillero.setAttribute("data-casillero", `${casillero}`);
             divCasillero.setAttribute("class", "casillero");
-            divCasillero.addEventListener("click", event => {
-                jugada(event);
-            });
+            // divCasillero.addEventListener("click", event => {
+            //     jugada(event);
+            // });
+            divCasillero.addEventListener("click", jugada);
             divCasillero.textContent = arregloTablero[casillero];
             divTablero.appendChild(divCasillero);
         };
     };
     
     function arrancar () {
+        jugador1 = FabricaJugador ((prompt("Nombre del jugador con marcas X?", "Jugador1")), "x");
+        jugador2 = FabricaJugador ((prompt("Nombre del jugador con marcas O?", "Jugador2")), "o");
+        jugadorEnTurno = jugador1;
+        arregloTablero = ["", "", "", "", "", "", "", "", ""];
+
         dibujarTablero();
     }
     
@@ -85,4 +94,5 @@ const juego = (function () {
     }
 })();
 
-juego.arrancar();
+const botonEmpezar = document.querySelector(".empezar");
+botonEmpezar.addEventListener("click", juego.arrancar);
