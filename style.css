@@ -9,23 +9,36 @@ body {
 
 .tablero {
     display: grid;
-    grid-template-columns: 4rem 4rem 4rem;
-    grid-auto-rows: 4rem;
+    grid-template-columns: 6rem 6rem 6rem;
+    grid-auto-rows: 6rem;
     gap: .5rem;
     justify-content: center;
     justify-items: stretch;
     align-items: stretch;
+    margin: 2rem;
     background-color: olivedrab;
     width: min-content;
 }
 
 .tablero > div {
     background-color: darkslateblue;
-    font-size: 3rem;
+    font-size: 4.5rem;
     text-align: center;
 }
 
 .divResultado {
     color: indianred;
     font-size: 2rem;
+    text-align: center;
+}
+
+button.empezar {
+    padding: 1rem;
+    margin: 2rem;
+    border-radius: 4rem;
+    border-width: 1rem;
+    background-color: darkorange;
+    color: rgb(41, 36, 80);
+    font-size: 2rem;
+    
 }
