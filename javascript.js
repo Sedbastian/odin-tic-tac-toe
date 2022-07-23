@@ -2,9 +2,10 @@ const juego = (function () {
     let jugador1;
     let jugador2;
     let jugadorEnTurno;
+    let contrincanteDeCompu;
     let arregloTablero;
     let numeroTotalJugadas;
-    let contrincanteDeCompu;
+    
 
     const divTablero = document.querySelector(".tablero");
 
@@ -93,8 +94,65 @@ const juego = (function () {
     };
     
     function jugadaCompu () {
+        // Arreglo de todos los 3s en linea:
+        let arregloDarreglos = [];
+        arregloDarreglos[0] = [0, 1, 2];
+        arregloDarreglos[1] = [3, 4, 5];
+        arregloDarreglos[2] = [6, 7, 8];
+        arregloDarreglos[3] = [0, 3, 6];
+        arregloDarreglos[4] = [1, 4, 7];
+        arregloDarreglos[5] = [2, 5, 8];
+        arregloDarreglos[6] = [0, 4, 8];
+        arregloDarreglos[7] = [2, 4, 6];
+        
+        // Hacer 3 en línea si se puede
+        for (let i=0; i < arregloDarreglos.length; i++) {
+            if ((arregloTablero[arregloDarreglos[i][0]] === jugadorEnTurno.marca && arregloTablero[arregloDarreglos[i][1]] === jugadorEnTurno.marca && arregloTablero[arregloDarreglos[i][2]] === "") 
+             || (arregloTablero[arregloDarreglos[i][0]] === jugadorEnTurno.marca && arregloTablero[arregloDarreglos[i][2]] === jugadorEnTurno.marca && arregloTablero[arregloDarreglos[i][1]] === "")
+             || (arregloTablero[arregloDarreglos[i][1]] === jugadorEnTurno.marca && arregloTablero[arregloDarreglos[i][2]] === jugadorEnTurno.marca && arregloTablero[arregloDarreglos[i][0]] === "")
+              ) {
+                let indiceParaMarcar = [(arregloTablero[arregloDarreglos[i][0]]), (arregloTablero[arregloDarreglos[i][1]]), (arregloTablero[arregloDarreglos[i][2]])].indexOf("");
+                arregloTablero[arregloDarreglos[i][indiceParaMarcar]] = jugadorEnTurno.marca;
+                jugadaHecha();
+                console.log("Había 2 en linea y el tercero libre!");
+                i = arregloDarreglos.length;
+                return;
+                };
+        };
+
+        // Evitar 3 en linea del contrincanteDeCompu
+        for (let i=0; i < arregloDarreglos.length; i++) {
+            if ((arregloTablero[arregloDarreglos[i][0]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][1]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][2]] === "")
+             || (arregloTablero[arregloDarreglos[i][0]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][2]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][1]] === "")
+             || (arregloTablero[arregloDarreglos[i][1]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][2]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][0]] === "")
+              ) {
+                let indiceParaEvitar = [(arregloTablero[arregloDarreglos[i][0]]), (arregloTablero[arregloDarreglos[i][1]]), (arregloTablero[arregloDarreglos[i][2]])].indexOf("");
+                arregloTablero[arregloDarreglos[i][indiceParaEvitar]] = jugadorEnTurno.marca;
+                jugadaHecha();
+                console.log("Un 3 en línea evitado!");
+                return;
+                };    
+        };
+        
+        // Jugada aleatoria
+        let casillerosLibres = [];
+        let indiceLibres = 0;
+        for (let casillero = 0; casillero < arregloTablero.length; casillero++) {
+            if (arregloTablero[casillero] === "") {
+                casillerosLibres[indiceLibres] = casillero;
+                indiceLibres++;
+            };
+        };
+
+        arregloTablero[casillerosLibres[Math.floor(Math.random() * (casillerosLibres.length))]] = jugadorEnTurno.marca;
+    
+        jugadaHecha();
+    };
+
+    function jugadaCompuBAK () {
         let tapoContrincanteDeCompu = false;
 
+        // Arreglo de todos los 3s en linea:
         let arregloDarreglos = [];
         arregloDarreglos[0] = [0, 1, 2];
         arregloDarreglos[1] = [3, 4, 5];
@@ -113,7 +171,7 @@ const juego = (function () {
                 arregloTablero[0] = jugadorEnTurno.marca;
                 arregloTablero[1] = jugadorEnTurno.marca;
                 arregloTablero[2] = jugadorEnTurno.marca;
-                console.log("logica usada");
+                console.log("Había 2 en linea y el tercero libre!");
                 jugadaHecha();
                 return;
         // Fila 2 para ganar
@@ -124,7 +182,7 @@ const juego = (function () {
                 arregloTablero[3] = jugadorEnTurno.marca;
                 arregloTablero[4] = jugadorEnTurno.marca;
                 arregloTablero[5] = jugadorEnTurno.marca;
-                console.log("logica usada");
+                console.log("Había 2 en linea y el tercero libre!");
                 jugadaHecha();
                 return;
         // Fila 3 para ganar
@@ -135,7 +193,7 @@ const juego = (function () {
                 arregloTablero[6] = jugadorEnTurno.marca;
                 arregloTablero[7] = jugadorEnTurno.marca;
                 arregloTablero[8] = jugadorEnTurno.marca;
-                console.log("logica usada");
+                console.log("Había 2 en linea y el tercero libre!");
                 jugadaHecha();
                 return;
         // Columna 1 para ganar
@@ -146,7 +204,7 @@ const juego = (function () {
                 arregloTablero[0] = jugadorEnTurno.marca;
                 arregloTablero[3] = jugadorEnTurno.marca;
                 arregloTablero[6] = jugadorEnTurno.marca;
-                console.log("logica usada");
+                console.log("Había 2 en linea y el tercero libre!");
                 jugadaHecha();
                 return;
         // Columna 2 para ganar
@@ -157,7 +215,7 @@ const juego = (function () {
                 arregloTablero[1] = jugadorEnTurno.marca;
                 arregloTablero[4] = jugadorEnTurno.marca;
                 arregloTablero[7] = jugadorEnTurno.marca;
-                console.log("logica usada");
+                console.log("Había 2 en linea y el tercero libre!");
                 jugadaHecha();
                 return;
         // Columna 3 para ganar
@@ -168,7 +226,7 @@ const juego = (function () {
                 arregloTablero[2] = jugadorEnTurno.marca;
                 arregloTablero[5] = jugadorEnTurno.marca;
                 arregloTablero[8] = jugadorEnTurno.marca;
-                console.log("logica usada");
+                console.log("Había 2 en linea y el tercero libre!");
                 jugadaHecha();
                 return;
         // Diagonal 1 para ganar
@@ -179,7 +237,7 @@ const juego = (function () {
                 arregloTablero[0] = jugadorEnTurno.marca;
                 arregloTablero[4] = jugadorEnTurno.marca;
                 arregloTablero[8] = jugadorEnTurno.marca;
-                console.log("logica usada");
+                console.log("Había 2 en linea y el tercero libre!");
                 jugadaHecha();
                 return;
         // Diagonal 2 para ganar
@@ -190,7 +248,7 @@ const juego = (function () {
                 arregloTablero[2] = jugadorEnTurno.marca;
                 arregloTablero[4] = jugadorEnTurno.marca;
                 arregloTablero[6] = jugadorEnTurno.marca;
-                console.log("logica usada");
+                console.log("Había 2 en linea y el tercero libre!");
                 jugadaHecha();
                 return;
         // Evitar 3 en linea del contrincanteDeCompu
@@ -204,7 +262,7 @@ const juego = (function () {
                     arregloTablero[arregloDarreglos[i][indiceParaEvitar]] = jugadorEnTurno.marca;
                     tapoContrincanteDeCompu = true;
                     jugadaHecha();
-                    console.log("Evitado!!!");
+                    console.log("Un 3 en línea evitado!");
                     break;
                 };
                 
@@ -227,7 +285,7 @@ const juego = (function () {
         };
     };
 
-    function jugadaCompuBAK () {
+    function jugadaCompuAleatoria () {
         let casillerosLibres = [];
         let indiceLibres = 0;
         for (let casillero = 0; casillero < arregloTablero.length; casillero++) {
@@ -246,11 +304,13 @@ const juego = (function () {
         jugador1 = FabricaJugador ((prompt("Nombre del jugador con marcas X?", "Jugador1")), "x");
         jugador2 = FabricaJugador ((prompt("Nombre del jugador con marcas O?", "Jugador2")), "o");
         jugadorEnTurno = jugador1;
+        
         if (jugador1.nombre === "compu" || jugador1.nombre === "Compu") {
             contrincanteDeCompu = jugador2;
         } else if (jugador2.nombre === "compu" || jugador2.nombre === "Compu") {
             contrincanteDeCompu = jugador1;
         };
+        
         arregloTablero = ["", "", "", "", "", "", "", "", ""];
         numeroTotalJugadas = 9;
 
