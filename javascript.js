@@ -91,6 +91,24 @@ const juego = (function () {
     };
     
     function jugadaCompu () {
+        let contrincante;
+        if (jugadorEnTurno === jugador1) {
+            contrincante = jugador2;
+        } else if (jugadorEnTurno === jugador2) {
+            contrincante = jugador1;
+        };
+        let tapoContrincante = false;
+
+        let arregloDarreglos = [];
+        arregloDarreglos[0] = [0, 1, 2];
+        arregloDarreglos[1] = [3, 4, 5];
+        arregloDarreglos[2] = [6, 7, 8];
+        arregloDarreglos[3] = [0, 3, 6];
+        arregloDarreglos[4] = [1, 4, 7];
+        arregloDarreglos[5] = [2, 5, 8];
+        arregloDarreglos[6] = [0, 4, 8];
+        arregloDarreglos[7] = [2, 4, 6];
+        
         // Fila 1 para ganar
         if ((arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[1] === jugadorEnTurno.marca && arregloTablero[2] === "")
           ||(arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[1] === "")
@@ -101,6 +119,7 @@ const juego = (function () {
                 arregloTablero[2] = jugadorEnTurno.marca;
                 console.log("logica usada");
                 jugadaHecha();
+                return;
         // Fila 2 para ganar
         } else if ((arregloTablero[3] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[5] === "")
                  ||(arregloTablero[3] === jugadorEnTurno.marca && arregloTablero[5] === jugadorEnTurno.marca && arregloTablero[4] === "")
@@ -111,6 +130,7 @@ const juego = (function () {
                 arregloTablero[5] = jugadorEnTurno.marca;
                 console.log("logica usada");
                 jugadaHecha();
+                return;
         // Fila 3 para ganar
         } else if ((arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[7] === jugadorEnTurno.marca && arregloTablero[8] === "")
                  ||(arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca && arregloTablero[7] === "")
@@ -121,6 +141,7 @@ const juego = (function () {
                 arregloTablero[8] = jugadorEnTurno.marca;
                 console.log("logica usada");
                 jugadaHecha();
+                return;
         // Columna 1 para ganar
         } else if ((arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[3] === jugadorEnTurno.marca && arregloTablero[6] === "")
                  ||(arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[3] === "")
@@ -131,6 +152,7 @@ const juego = (function () {
                 arregloTablero[6] = jugadorEnTurno.marca;
                 console.log("logica usada");
                 jugadaHecha();
+                return;
         // Columna 2 para ganar
         } else if ((arregloTablero[1] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[7] === "")
                  ||(arregloTablero[1] === jugadorEnTurno.marca && arregloTablero[7] === jugadorEnTurno.marca && arregloTablero[4] === "")
@@ -141,6 +163,7 @@ const juego = (function () {
                 arregloTablero[6] = jugadorEnTurno.marca;
                 console.log("logica usada");
                 jugadaHecha();
+                return;
         // Columna 3 para ganar
         } else if ((arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[5] === jugadorEnTurno.marca && arregloTablero[8] === "")
                  ||(arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca && arregloTablero[5] === "")
@@ -151,6 +174,7 @@ const juego = (function () {
                 arregloTablero[6] = jugadorEnTurno.marca;
                 console.log("logica usada");
                 jugadaHecha();
+                return;
         // Diagonal 1 para ganar
         } else if ((arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[8] === "")
                  ||(arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca && arregloTablero[4] === "")
@@ -161,6 +185,7 @@ const juego = (function () {
                 arregloTablero[8] = jugadorEnTurno.marca;
                 console.log("logica usada");
                 jugadaHecha();
+                return;
         // Diagonal 2 para ganar
         } else if ((arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[6] === "")
                  ||(arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[4] === "")
@@ -171,8 +196,25 @@ const juego = (function () {
                 arregloTablero[8] = jugadorEnTurno.marca;
                 console.log("logica usada");
                 jugadaHecha();
-        // Aleatorio
+                return;
         } else {
+            for (let i=0; i < arregloDarreglos.length; i++) {
+                if ((arregloTablero[arregloDarreglos[i][0]] === contrincante.marca && arregloTablero[arregloDarreglos[i][1]] === contrincante.marca && arregloTablero[arregloDarreglos[i][2]] === "")
+                  ||(arregloTablero[arregloDarreglos[i][0]] === contrincante.marca && arregloTablero[arregloDarreglos[i][2]] === contrincante.marca && arregloTablero[arregloDarreglos[i][1]] === "")
+                  ||(arregloTablero[arregloDarreglos[i][1]] === contrincante.marca && arregloTablero[arregloDarreglos[i][2]] === contrincante.marca && arregloTablero[arregloDarreglos[i][0]] === "")
+                  ) {
+                    let indiceParaEvitar = [(arregloTablero[arregloDarreglos[i][0]]), (arregloTablero[arregloDarreglos[i][1]]), (arregloTablero[arregloDarreglos[i][2]])].indexOf("");
+                    arregloTablero[arregloDarreglos[i][indiceParaEvitar]] = jugadorEnTurno.marca;
+                    tapoContrincante = true;
+                    jugadaHecha();
+                    console.log("Evitado!!!");
+                    break;
+                };
+                
+            }
+        };
+       
+        if (!tapoContrincante) {
             let casillerosLibres = [];
             let indiceLibres = 0;
             for (let casillero = 0; casillero < arregloTablero.length; casillero++) {
