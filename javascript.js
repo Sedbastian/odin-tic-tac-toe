@@ -174,6 +174,7 @@ const juego = (function () {
         
         let arregloTableroCopia = arregloTablero;
 
+        // Hacer Fork si se puede
         for (let i=0; i < 1; i++) {
             for(let j=0; j < 4; j++) {
                 
@@ -198,7 +199,7 @@ const juego = (function () {
 
                         arregloTablero = arregloTableroCopia;
                         jugadaHecha();
-                        console.log("Fork!");
+                        console.log("Fork! n1");
                         return;
                     };
                     
@@ -221,7 +222,7 @@ const juego = (function () {
                         arregloTablero = arregloTableroCopia;
                          
                         jugadaHecha();
-                        console.log("Fork!");
+                        console.log("Fork! n1");
                         return;
                     };
                     
@@ -244,62 +245,12 @@ const juego = (function () {
                         arregloTablero = arregloTableroCopia;
                          
                         jugadaHecha();
-                        console.log("Fork!");
+                        console.log("Fork! n1");
                         return;
                     };
                 };
                 
-                // Segundo tipo de Fork (no hace falta chequear si arregloTableroCopia[4] === contrincanteDeCompu.marca)
-                if (arregloTableroCopia[0] === jugadorEnTurno.marca && arregloTableroCopia[8] === jugadorEnTurno.marca && arregloTableroCopia[4] === contrincanteDeCompu.marca) {
-                    
-                    if (arregloTableroCopia[1] === "" && arregloTableroCopia[5] === "" && arregloTableroCopia[2] === "") {
-                        
-                        arregloTableroCopia[2] = jugadorEnTurno.marca;
-                        
-                        if (j === 1) {
-                            arregloTableroCopia = rotarTableroIzq(rotarTableroIzq(rotarTableroIzq(arregloTableroCopia)));
-                        } else if (j === 2) {
-                            arregloTableroCopia = rotarTableroIzq(rotarTableroIzq(arregloTableroCopia));
-                        } else if (j === 3) {
-                            arregloTableroCopia = rotarTableroIzq(arregloTableroCopia);
-                        };
-                        
-                        if (i === 1) {
-                            arregloTableroCopia = espejarTableroVert(arregloTableroCopia);
-                        };
-
-                        arregloTablero = arregloTableroCopia;
-                         
-                        jugadaHecha();
-                        console.log("Fork!");
-                        return;
-                    };
-                    
-                    if (arregloTableroCopia[3] === "" && arregloTableroCopia[7] === "" && arregloTableroCopia[6] === "") {
-                        
-                        arregloTableroCopia[6] = jugadorEnTurno.marca;
-                        
-                        if (j === 1) {
-                            arregloTableroCopia = rotarTableroIzq(rotarTableroIzq(rotarTableroIzq(arregloTableroCopia)));
-                        } else if (j === 2) {
-                            arregloTableroCopia = rotarTableroIzq(rotarTableroIzq(arregloTableroCopia));
-                        } else if (j === 3) {
-                            arregloTableroCopia = rotarTableroIzq(arregloTableroCopia);
-                        };
-                        
-                        if (i === 1) {
-                            arregloTableroCopia = espejarTableroVert(arregloTableroCopia);
-                        };
-
-                        arregloTablero = arregloTableroCopia;
-                         
-                        jugadaHecha();
-                        console.log("Fork!");
-                        return;
-                    };
-                };
-                
-                // Tercer tipo de Fork
+                // Segundo tipo de Fork
                 if (arregloTableroCopia[1] === jugadorEnTurno.marca && arregloTableroCopia[3] === jugadorEnTurno.marca) {
                     
                     if (arregloTableroCopia[5] === "" && arregloTableroCopia[7] === "" && arregloTableroCopia[4] === "") {
@@ -321,7 +272,7 @@ const juego = (function () {
                         arregloTablero = arregloTableroCopia;
                          
                         jugadaHecha();
-                        console.log("Fork!");
+                        console.log("Fork n2!");
                         return;
                     };
 
@@ -344,12 +295,12 @@ const juego = (function () {
                         arregloTablero = arregloTableroCopia;
                          
                         jugadaHecha();
-                        console.log("Fork!");
+                        console.log("Fork n2!");
                         return;
                     };
                 };
                 
-                // Cuarto tipo de Fork
+                // Tercer tipo de Fork
                 if (arregloTableroCopia[0] === jugadorEnTurno.marca && arregloTableroCopia[5] === jugadorEnTurno.marca) {
                     
                     if (arregloTableroCopia[1] === "" && arregloTableroCopia[8] === "" && arregloTableroCopia[2] === "") {
@@ -371,12 +322,12 @@ const juego = (function () {
                         arregloTablero = arregloTableroCopia;
                          
                         jugadaHecha();
-                        console.log("Fork!");
+                        console.log("Fork n3!");
                         return;
                     };
                 };
 
-                // Quinto tipo de Fork (creo q no hay mas tipos)
+                // Cuarto tipo de Fork (creo q no hay mas tipos)
                 if (arregloTableroCopia[0] === jugadorEnTurno.marca && arregloTableroCopia[4] === jugadorEnTurno.marca && arregloTableroCopia[8] === contrincanteDeCompu.marca) {
                     
                     if (arregloTableroCopia[7] === "" && arregloTableroCopia[2] === "" && arregloTableroCopia[1] === "") {
@@ -398,7 +349,7 @@ const juego = (function () {
                         arregloTablero = arregloTableroCopia;
                          
                         jugadaHecha();
-                        console.log("Fork!");
+                        console.log("Fork n4!");
                         return;
                     };
 
@@ -421,7 +372,7 @@ const juego = (function () {
                         arregloTablero = arregloTableroCopia;
                          
                         jugadaHecha();
-                        console.log("Fork!");
+                        console.log("Fork! n4");
                         return;
                     };
                 };
@@ -445,157 +396,6 @@ const juego = (function () {
         jugadaHecha();
         console.log("Jugada aleatoria");
         return;
-    };
-
-    function jugadaCompuBAK () {
-        let tapoContrincanteDeCompu = false;
-
-        // Arreglo de todos los 3s en linea:
-        let arregloDarreglos = [];
-        arregloDarreglos[0] = [0, 1, 2];
-        arregloDarreglos[1] = [3, 4, 5];
-        arregloDarreglos[2] = [6, 7, 8];
-        arregloDarreglos[3] = [0, 3, 6];
-        arregloDarreglos[4] = [1, 4, 7];
-        arregloDarreglos[5] = [2, 5, 8];
-        arregloDarreglos[6] = [0, 4, 8];
-        arregloDarreglos[7] = [2, 4, 6];
-        
-        // Fila 1 para ganar
-        if ((arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[1] === jugadorEnTurno.marca && arregloTablero[2] === "")
-          ||(arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[1] === "")
-          ||(arregloTablero[1] === jugadorEnTurno.marca && arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[0] === "")
-            ) {
-                arregloTablero[0] = jugadorEnTurno.marca;
-                arregloTablero[1] = jugadorEnTurno.marca;
-                arregloTablero[2] = jugadorEnTurno.marca;
-                console.log("Había 2 en linea y el tercero libre!");
-                jugadaHecha();
-                return;
-        // Fila 2 para ganar
-        } else if ((arregloTablero[3] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[5] === "")
-                 ||(arregloTablero[3] === jugadorEnTurno.marca && arregloTablero[5] === jugadorEnTurno.marca && arregloTablero[4] === "")
-                 ||(arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[5] === jugadorEnTurno.marca && arregloTablero[3] === "")
-            ) {
-                arregloTablero[3] = jugadorEnTurno.marca;
-                arregloTablero[4] = jugadorEnTurno.marca;
-                arregloTablero[5] = jugadorEnTurno.marca;
-                console.log("Había 2 en linea y el tercero libre!");
-                jugadaHecha();
-                return;
-        // Fila 3 para ganar
-        } else if ((arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[7] === jugadorEnTurno.marca && arregloTablero[8] === "")
-                 ||(arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca && arregloTablero[7] === "")
-                 ||(arregloTablero[7] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca && arregloTablero[6] === "")
-            ) {
-                arregloTablero[6] = jugadorEnTurno.marca;
-                arregloTablero[7] = jugadorEnTurno.marca;
-                arregloTablero[8] = jugadorEnTurno.marca;
-                console.log("Había 2 en linea y el tercero libre!");
-                jugadaHecha();
-                return;
-        // Columna 1 para ganar
-        } else if ((arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[3] === jugadorEnTurno.marca && arregloTablero[6] === "")
-                 ||(arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[3] === "")
-                 ||(arregloTablero[3] === jugadorEnTurno.marca && arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[0] === "")
-            ) {
-                arregloTablero[0] = jugadorEnTurno.marca;
-                arregloTablero[3] = jugadorEnTurno.marca;
-                arregloTablero[6] = jugadorEnTurno.marca;
-                console.log("Había 2 en linea y el tercero libre!");
-                jugadaHecha();
-                return;
-        // Columna 2 para ganar
-        } else if ((arregloTablero[1] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[7] === "")
-                 ||(arregloTablero[1] === jugadorEnTurno.marca && arregloTablero[7] === jugadorEnTurno.marca && arregloTablero[4] === "")
-                 ||(arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[7] === jugadorEnTurno.marca && arregloTablero[1] === "")
-            ) {
-                arregloTablero[1] = jugadorEnTurno.marca;
-                arregloTablero[4] = jugadorEnTurno.marca;
-                arregloTablero[7] = jugadorEnTurno.marca;
-                console.log("Había 2 en linea y el tercero libre!");
-                jugadaHecha();
-                return;
-        // Columna 3 para ganar
-        } else if ((arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[5] === jugadorEnTurno.marca && arregloTablero[8] === "")
-                 ||(arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca && arregloTablero[5] === "")
-                 ||(arregloTablero[5] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca && arregloTablero[2] === "")
-            ) {
-                arregloTablero[2] = jugadorEnTurno.marca;
-                arregloTablero[5] = jugadorEnTurno.marca;
-                arregloTablero[8] = jugadorEnTurno.marca;
-                console.log("Había 2 en linea y el tercero libre!");
-                jugadaHecha();
-                return;
-        // Diagonal 1 para ganar
-        } else if ((arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[8] === "")
-                 ||(arregloTablero[0] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca && arregloTablero[4] === "")
-                 ||(arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[8] === jugadorEnTurno.marca && arregloTablero[0] === "")
-            ) {
-                arregloTablero[0] = jugadorEnTurno.marca;
-                arregloTablero[4] = jugadorEnTurno.marca;
-                arregloTablero[8] = jugadorEnTurno.marca;
-                console.log("Había 2 en linea y el tercero libre!");
-                jugadaHecha();
-                return;
-        // Diagonal 2 para ganar
-        } else if ((arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[6] === "")
-                 ||(arregloTablero[2] === jugadorEnTurno.marca && arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[4] === "")
-                 ||(arregloTablero[4] === jugadorEnTurno.marca && arregloTablero[6] === jugadorEnTurno.marca && arregloTablero[2] === "")
-            ) {
-                arregloTablero[2] = jugadorEnTurno.marca;
-                arregloTablero[4] = jugadorEnTurno.marca;
-                arregloTablero[6] = jugadorEnTurno.marca;
-                console.log("Había 2 en linea y el tercero libre!");
-                jugadaHecha();
-                return;
-        // Evitar 3 en linea del contrincanteDeCompu
-        } else {
-            for (let i=0; i < arregloDarreglos.length; i++) {
-                if ((arregloTablero[arregloDarreglos[i][0]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][1]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][2]] === "")
-                  ||(arregloTablero[arregloDarreglos[i][0]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][2]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][1]] === "")
-                  ||(arregloTablero[arregloDarreglos[i][1]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][2]] === contrincanteDeCompu.marca && arregloTablero[arregloDarreglos[i][0]] === "")
-                  ) {
-                    let indiceParaEvitar = [(arregloTablero[arregloDarreglos[i][0]]), (arregloTablero[arregloDarreglos[i][1]]), (arregloTablero[arregloDarreglos[i][2]])].indexOf("");
-                    arregloTablero[arregloDarreglos[i][indiceParaEvitar]] = jugadorEnTurno.marca;
-                    tapoContrincanteDeCompu = true;
-                    jugadaHecha();
-                    console.log("Un 3 en línea evitado!");
-                    break;
-                };
-                
-            }
-        };
-       
-        if (!tapoContrincanteDeCompu) {
-            let casillerosLibres = [];
-            let indiceLibres = 0;
-            for (let casillero = 0; casillero < arregloTablero.length; casillero++) {
-                if (arregloTablero[casillero] === "") {
-                    casillerosLibres[indiceLibres] = casillero;
-                    indiceLibres++;
-                };
-            };
-
-            arregloTablero[casillerosLibres[Math.floor(Math.random() * (casillerosLibres.length))]] = jugadorEnTurno.marca;
-        
-            jugadaHecha();
-        };
-    };
-
-    function jugadaCompuAleatoria () {
-        let casillerosLibres = [];
-        let indiceLibres = 0;
-        for (let casillero = 0; casillero < arregloTablero.length; casillero++) {
-            if (arregloTablero[casillero] === "") {
-                casillerosLibres[indiceLibres] = casillero;
-                indiceLibres++;
-            };
-        };
-        
-        arregloTablero[casillerosLibres[Math.floor(Math.random() * (casillerosLibres.length))]] = jugadorEnTurno.marca;
-        
-        jugadaHecha();
     };
 
     function arrancar () {
